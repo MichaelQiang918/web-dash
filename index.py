@@ -8,33 +8,80 @@ from apps import app1, app2, app3
 
 nav = dbc.Nav(
     [
-        dbc.NavItem(dbc.NavLink("app3", href="/")),
+        dbc.NavItem(dbc.NavLink("app3", href="/"), style={
+            'background': '#353a48',
+            'color': 'white',
+        }),
         dbc.NavItem(dbc.NavLink("app1", href="/apps/app1")),
         dbc.NavItem(dbc.NavLink("app2", href="/apps/app2")),
     ],
     vertical="md",
 )
+PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
+navbar = dbc.Navbar(
+    [
+        html.A(
+            # Use row and col to control vertical alignment of logo / brand
+            dbc.Row(
+                [
+                    dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
+                    dbc.Col(dbc.NavbarBrand("WM", className="ml-2")),
+                ],
+                align="center",
+                no_gutters=True,
+            ),
+            href="https://plot.ly",
+        ),
+        dbc.NavbarToggler(id="navbar-toggler"),
+        # dbc.Collapse(search_bar, id="navbar-collapse", navbar=True),
+    ],
+    color="#1f1b1b",
+    dark=True,
+)
 app.layout = html.Div(
-    id='container',
+    id='',
     style={
-        'display': 'grid',
-        'grid-template-columns': '1fr 6fr',
+
     },
     children=[
-        dcc.Location(id='url', refresh=False),
         html.Div(
+            id='navbar',
             style={
-                'background': '#13dada',
+                'position': 'fixed',
+                'width': '100%',
+                'top': '0px',
             },
-            children=[nav]
+            children=[navbar]
+
         ),
         html.Div(
-            id='page-content',
+            id='container',
             style={
-                'background': 'aqua',
+                'display': 'grid',
+                'grid-template-columns': '1fr 6fr',
+                'margin-top': '56px',
             },
-        ),
-    ])
+            children=[
+                dcc.Location(id='url', refresh=False),
+
+                html.Div(
+                    id='nav',
+                    style={
+                        'background': '#353a48',
+                    },
+                    children=[nav]
+                ),
+                html.Div(
+                    id='page-content',
+                    style={
+                        'height': '701px',
+                        'background': '#eeeeee'
+                    },
+
+                ),
+            ])
+    ]
+)
 
 
 @app.callback(Output('page-content', 'children'),
@@ -51,4 +98,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)
