@@ -9,11 +9,14 @@ from apps import app1, app2, app3
 nav = dbc.Nav(
     [
         dbc.NavItem(dbc.NavLink("app3", href="/"), style={
-            'background': '#353a48',
-            'color': 'white',
+            # 'background': '#353a48',
         }),
-        dbc.NavItem(dbc.NavLink("app1", href="/apps/app1")),
-        dbc.NavItem(dbc.NavLink("app2", href="/apps/app2")),
+        dbc.NavItem(dbc.NavLink("app1", href="/apps/app1"), style={
+            # 'background': '#353a48',
+        }),
+        dbc.NavItem(dbc.NavLink("app2", href="/apps/app2"), style={
+            # 'background': '#353a48',
+        }),
     ],
     vertical="md",
 )
@@ -58,7 +61,7 @@ app.layout = html.Div(
             id='container',
             style={
                 'display': 'grid',
-                'grid-template-columns': '1fr 6fr',
+                'grid-template-columns': '1fr 5fr',
                 'margin-top': '56px',
             },
             children=[
@@ -67,7 +70,15 @@ app.layout = html.Div(
                 html.Div(
                     id='nav',
                     style={
-                        'background': '#353a48',
+                        'position': 'relative',
+                        # 'background': '#353a48',
+                        # 'background-image': 'url(./assets/sidebar.jpg)',
+                        # 'background-repeat': 'no-repeat',
+                        # 'background-position': 'center center',
+                        # 'background-size': '100% 100%',
+                        # 'width': '100%',
+                        # 'margin': '0 auto',
+                        # 'box-shadow': '0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)'
                     },
                     children=[nav]
                 ),
