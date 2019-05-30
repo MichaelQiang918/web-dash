@@ -20,7 +20,7 @@ nav = dbc.Nav(
     ],
     vertical="md",
 )
-PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
+PLOTLY_LOGO = "http://adopt-web.azurewebsites.net/assets/images/signin/logo.png"
 navbar = dbc.Navbar(
     [
         html.A(
@@ -28,12 +28,11 @@ navbar = dbc.Navbar(
             dbc.Row(
                 [
                     dbc.Col(html.Img(src=PLOTLY_LOGO, height="30px")),
-                    dbc.Col(dbc.NavbarBrand("WM", className="ml-2")),
+                    dbc.Col(dbc.NavbarBrand("GroupM", className="ml-2")),
                 ],
                 align="center",
                 no_gutters=True,
             ),
-            href="https://plot.ly",
         ),
         dbc.NavbarToggler(id="navbar-toggler"),
         # dbc.Collapse(search_bar, id="navbar-collapse", navbar=True),
