@@ -1,9 +1,10 @@
-from app import app
+
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
-import plotly.plotly as py
+from app import app
+
 import plotly.graph_objs as go
 import numpy as np
 # 折线图
