@@ -59,9 +59,16 @@ layout_scatter = dict(title='Styled Scatter',
 
 # 柱状图
 data_bar = [go.Bar(
-    x=['giraffes', 'orangutans', 'monkeys','giraffes1', 'orangutans1', 'monkeys1', 'giraffes2'],
+    x=['giraffes', 'orangutans', 'monkeys', 'giraffes1',
+        'orangutans1', 'monkeys1', 'giraffes2'],
     y=[20, -14, 23, 99, 100, -11, 19]
 )]
+# 饼图
+labels_pie = ['Oxygen', 'Hydrogen', 'Carbon_Dioxide', 'Nitrogen']
+values_pie = [4500, 2500, 1053, 500]
+
+trace_pie = go.Pie(labels=labels_pie, values=values_pie)
+data_pie = [trace_pie]
 
 
 layout = html.Div(
@@ -159,28 +166,7 @@ layout = html.Div(
             children=[
                 dcc.Graph(
                     figure=go.Figure(
-                        data=[
-                            go.Bar(
-                                x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
-                                y=[219, 146, 112, 127, 124, 180, 236, 207, 236, 263,
-                                   350, 430, 474, 526, 488, 537, 500, 439],
-                                name='Rest of world',
-                                marker=go.bar.Marker(
-                                    color='rgb(55, 83, 109)'
-                                )
-                            ),
-                            go.Bar(
-                                x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
-                                y=[16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270,
-                                   299, 340, 403, 549, 499],
-                                name='China',
-                                marker=go.bar.Marker(
-                                    color='rgb(26, 118, 255)'
-                                )
-                            )
-                        ],
+                        data=data_pie,
                         layout=go.Layout(
                             title='US Export of Plastic Scrap',
                             showlegend=True,
