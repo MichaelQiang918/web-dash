@@ -132,7 +132,51 @@ layout_multiple_axes = go.Layout(
         position=0.85
     )
 )
-fig_multiple_axes = go.Figure(data=data_multiple_axes, layout=layout_multiple_axes)
+fig_multiple_axes = go.Figure(
+    data=data_multiple_axes, layout=layout_multiple_axes)
+
+# range slider and selector
+
+df_range_slider_selector = pd.read_csv(
+    'https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv')
+df_range_slider_selector.columns = [col.replace('AAPL.', '') for col in df_range_slider_selector.columns]
+
+trace_range_slider_selector = go.Scatter(x=list(df_range_slider_selector.Date),
+                   y=list(df_range_slider_selector.High))
+
+data_range_slider_selector = [trace_range_slider_selector]
+layout_range_slider_selector = dict(
+    title='Time series with range slider and selectors',
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label='1m',
+                     step='month',
+                     stepmode='backward'),
+                dict(count=6,
+                     label='6m',
+                     step='month',
+                     stepmode='backward'),
+                dict(count=1,
+                     label='YTD',
+                     step='year',
+                     stepmode='todate'),
+                dict(count=1,
+                     label='1y',
+                     step='year',
+                     stepmode='backward'),
+                dict(step='all')
+            ])
+        ),
+        rangeslider=dict(
+            visible=True
+        ),
+        type='date'
+    )
+)
+
+fig_range_slider_selector = dict(data=data_range_slider_selector, layout=layout_range_slider_selector)
 
 
 layout = html.Div(
@@ -204,39 +248,7 @@ layout = html.Div(
             },
             children=[
                 dcc.Graph(
-                    figure=go.Figure(
-                        data=[
-                            go.Bar(
-                                x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
-                                y=[219, 146, 112, 127, 124, 180, 236, 207, 236, 263,
-                                   350, 430, 474, 526, 488, 537, 500, 439],
-                                name='Rest of world',
-                                marker=go.bar.Marker(
-                                    color='rgb(55, 83, 109)'
-                                )
-                            ),
-                            go.Bar(
-                                x=[1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003,
-                                   2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012],
-                                y=[16, 13, 10, 11, 28, 37, 43, 55, 56, 88, 105, 156, 270,
-                                   299, 340, 403, 549, 499],
-                                name='China',
-                                marker=go.bar.Marker(
-                                    color='rgb(26, 118, 255)'
-                                )
-                            )
-                        ],
-                        layout=go.Layout(
-                            title='US Export of Plastic Scrap',
-                            showlegend=True,
-                            legend=go.layout.Legend(
-                                x=0,
-                                y=1.0
-                            ),
-                            margin=go.layout.Margin(l=40, r=0, t=40, b=30)
-                        )
-                    ),
+                    figure=fig_range_slider_selector,
                     style={'height': 300},
                     id='my-graph-4'
                 )
